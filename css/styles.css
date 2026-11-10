@@ -1,0 +1,728 @@
+/* ==========================================================
+   Pride · Creamfields · Noche de Museos
+   Paleta del documento: Azul noche, Fucsia y Marfil
+   ========================================================== */
+
+@font-face {
+  font-family: "Big Shoulders";
+  src: url("../fonts/big-shoulders.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../fonts/newsreader-italic.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --noche: #17172F;
+  --noche-hondo: #0E0E20;
+  --noche-claro: #24244A;
+  --fucsia: #F72585;
+  --marfil: #F4F1EA;
+  --tinta: #17172F;
+  --tinta-suave: #4A4A66;
+
+  /* Colores tomados de los archivos de cada tema */
+  --arco-1: #FF3520;
+  --arco-2: #FF7611;
+  --arco-3: #FFBF00;
+  --arco-4: #00BBB9;
+  --arco-5: #0082CC;
+  --arco-6: #8410CD;
+  --hueso: #63B9BC;
+  --farol: #F2C14E;
+
+  --display: "Big Shoulders", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --texto: "Newsreader", Georgia, "Times New Roman", serif;
+
+  --bar-h: 3.5rem;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar-h) + env(safe-area-inset-top, 0px));
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-optical-sizing: auto;
+  background: var(--noche);
+  color: var(--marfil);
+  font-family: var(--texto);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--fucsia);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+[hidden] { display: none !important; }
+
+body.intro-open { overflow: hidden; }
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  background: var(--fucsia);
+  color: #fff;
+  padding: .5rem 1rem;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+.skip-link:focus { top: calc(.75rem + env(safe-area-inset-top, 0px)); }
+
+/* ---------- Barra superior ---------- */
+
+.site-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: var(--bar-h);
+  padding: env(safe-area-inset-top, 0px) clamp(1rem, 4vw, 3rem) 0;
+  background: rgba(23, 23, 47, .92);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(244, 241, 234, .1);
+}
+
+.brand {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: .01em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-bar ul {
+  display: flex;
+  gap: clamp(.75rem, 2.5vw, 2rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-bar nav a {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  text-decoration: none;
+  padding: .35rem 0;
+  border-bottom: 3px solid transparent;
+  transition: border-color .2s;
+}
+.site-bar nav a:hover { border-bottom-color: rgba(247, 37, 133, .5); }
+.site-bar nav a[aria-current="page"] { border-bottom-color: var(--fucsia); }
+
+@media (max-width: 560px) {
+  .site-bar { flex-direction: column; align-items: flex-start; gap: 0; padding-bottom: .35rem; }
+  .brand { padding-top: .4rem; font-size: 1.15rem; }
+  .site-bar nav a { font-size: 1.05rem; }
+}
+
+/* ---------- Portada ---------- */
+
+.home-hero {
+  min-height: calc(100vh - var(--bar-h));
+  min-height: calc(100svh - var(--bar-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem);
+}
+
+.home-tagline {
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  max-width: 30ch;
+  margin: 0 0 clamp(1.5rem, 4vw, 3rem);
+  color: rgba(244, 241, 234, .82);
+}
+
+.home-topics {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid rgba(244, 241, 234, .18);
+}
+
+.home-topics li { border-bottom: 1px solid rgba(244, 241, 234, .18); }
+
+.home-topics a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .4rem;
+  padding: clamp(.6rem, 1.6vw, 1.1rem) 0;
+  text-decoration: none;
+}
+
+.t-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3.4rem, 12vw, 10rem);
+  line-height: .9;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  transition: color .35s, text-shadow .35s;
+}
+
+.t-sub {
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  color: rgba(244, 241, 234, .7);
+  font-style: italic;
+  max-width: 40ch;
+  padding-bottom: .2em;
+}
+
+/* Cada tema reacciona con algo propio de su archivo */
+.t-pride .t-name {
+  background: linear-gradient(90deg, var(--arco-1), var(--arco-2), var(--arco-3), var(--arco-4), var(--arco-5), var(--arco-6)) 0 100% / 0% 100% no-repeat, var(--marfil);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: background-size .5s ease;
+}
+.t-pride:hover .t-name,
+.t-pride:focus-visible .t-name { background-size: 100% 100%, auto; }
+
+.t-cream:hover .t-name,
+.t-cream:focus-visible .t-name {
+  color: #fff;
+  text-shadow: 0 0 .25em rgba(255, 255, 255, .75), 0 0 .6em var(--fucsia);
+}
+
+.t-museos:hover .t-name,
+.t-museos:focus-visible .t-name { color: var(--farol); }
+
+/* ---------- Cabecera de cada tema ---------- */
+
+.topic-head {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(20rem, 62vh, 38rem);
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  isolation: isolate;
+}
+
+.topic-head-text { position: relative; z-index: 2; max-width: 60rem; }
+
+.topic-head h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(4rem, 15vw, 12rem);
+  line-height: .85;
+  text-transform: uppercase;
+  margin: 0 0 .15em;
+  letter-spacing: -.01em;
+}
+.topic-head h1:focus { outline: none; }
+
+.deck {
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.6vw, 1.9rem);
+  line-height: 1.3;
+  margin: 0 0 1.25rem;
+  max-width: 28ch;
+}
+
+.replay {
+  font: 600 1rem var(--display);
+  letter-spacing: .02em;
+  color: var(--marfil);
+  background: transparent;
+  border: 1.5px solid rgba(244, 241, 234, .45);
+  border-radius: 999px;
+  padding: .45rem 1.1rem;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+}
+.replay:hover { background: rgba(244, 241, 234, .1); border-color: var(--marfil); }
+
+/* Pride: las franjas del arcoíris del archivo como base de la cabecera */
+.head-art-pride {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  z-index: 0;
+  transform: skewX(-14deg) translateX(34%);
+  transform-origin: bottom;
+  -webkit-mask-image: linear-gradient(to left, #000 45%, transparent 85%);
+  mask-image: linear-gradient(to left, #000 45%, transparent 85%);
+}
+.head-art-pride span:nth-child(1) { background: var(--arco-1); }
+.head-art-pride span:nth-child(2) { background: var(--arco-2); }
+.head-art-pride span:nth-child(3) { background: var(--arco-3); }
+.head-art-pride span:nth-child(4) { background: var(--arco-4); }
+.head-art-pride span:nth-child(5) { background: var(--arco-5); }
+.head-art-pride span:nth-child(6) { background: var(--arco-6); }
+.view-pride .topic-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(23, 23, 47, .85), rgba(23, 23, 47, 0) 60%);
+  z-index: 1;
+}
+
+/* Creamfields: la luz del archivo como fondo */
+.view-creamfields .topic-head { background: var(--noche-hondo); }
+.head-art-cream {
+  position: absolute;
+  inset: -20% -10% -20% 20%;
+  z-index: 0;
+  background: url("../assets/luces-creamfields.webp") center / cover no-repeat;
+  mix-blend-mode: screen;
+  opacity: .85;
+}
+.head-art-cream::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--fucsia);
+  -webkit-mask: url("../assets/luces-creamfields.webp") center / cover no-repeat;
+  mask: url("../assets/luces-creamfields.webp") center / cover no-repeat;
+  opacity: .55;
+  transform: scale(1.15) rotate(8deg);
+}
+
+/* Noche de Museos: el T-Rex del archivo */
+.view-museos .topic-head {
+  background:
+    radial-gradient(1px 1px at 12% 22%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 34% 12%, var(--marfil) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 58% 30%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 78% 16%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 90% 40%, var(--marfil) 99%, transparent),
+    linear-gradient(to bottom, var(--noche-hondo), var(--noche) 70%);
+}
+.head-art-museos {
+  position: absolute;
+  right: clamp(-6rem, -4vw, 0rem);
+  bottom: 0;
+  width: min(58vw, 46rem);
+  z-index: 0;
+  opacity: .9;
+}
+@media (max-width: 700px) {
+  .head-art-museos { width: 90vw; right: -18vw; top: 3rem; bottom: auto; opacity: .4; }
+}
+
+/* ---------- Lectura ---------- */
+
+.reading {
+  background: var(--marfil);
+  color: var(--tinta);
+  padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1rem, 4vw, 3rem);
+}
+
+.measure { max-width: 38rem; margin: 0 auto; display: flow-root; }
+
+.reading h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1;
+  margin: 0 0 1.75rem;
+  max-width: 18ch;
+}
+
+.reading p {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  margin: 0 0 1.3em;
+  hyphens: auto;
+}
+
+.reading .lede {
+  font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+  line-height: 1.5;
+}
+
+.view-pride .reading h2 { border-left: 6px solid; border-image: linear-gradient(var(--arco-1), var(--arco-2), var(--arco-3), var(--arco-4), var(--arco-5), var(--arco-6)) 1; padding-left: .9rem; }
+.view-creamfields .reading h2 { border-left: 6px solid var(--fucsia); padding-left: .9rem; }
+.view-museos .reading h2 { border-left: 6px solid var(--hueso); padding-left: .9rem; }
+
+.poster {
+  margin: 2.5rem 0;
+}
+.poster img {
+  width: 100%;
+  max-width: 26rem;
+  box-shadow: 0 1.5rem 3rem -1.5rem rgba(23, 23, 47, .6);
+}
+.poster figcaption {
+  font-size: .95rem;
+  line-height: 1.45;
+  color: var(--tinta-suave);
+  margin-top: .75rem;
+  max-width: 26rem;
+}
+@media (min-width: 1100px) {
+  .poster { margin: .5rem -16rem 1.5rem 2rem; float: right; width: 20rem; }
+}
+
+/* ---------- Siguiente tema ---------- */
+
+.next a {
+  display: block;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem);
+  text-decoration: none;
+  background: var(--noche);
+  transition: background .25s;
+}
+.next a:hover { background: var(--noche-claro); }
+.next-hint {
+  display: block;
+  font-style: italic;
+  color: rgba(244, 241, 234, .75);
+  margin-bottom: .25rem;
+}
+.next-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.8rem, 8vw, 6rem);
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+/* ---------- Pie ---------- */
+
+.site-foot {
+  background: var(--noche-hondo);
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1rem, 4vw, 3rem) calc(2.5rem + env(safe-area-inset-bottom, 0px));
+}
+.foot-inner { max-width: 70rem; }
+.site-foot h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  margin: 0 0 1rem;
+  color: var(--fucsia);
+}
+.members {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: .35rem 1.5rem;
+  font-size: 1.15rem;
+}
+.foot-note { margin: 0; font-size: .95rem; color: rgba(244, 241, 234, .6); }
+
+/* ==========================================================
+   Animaciones de entrada (pantalla completa)
+   ========================================================== */
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: var(--noche);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: opacity .6s ease, visibility .6s;
+}
+.intro.is-leaving { opacity: 0; visibility: hidden; }
+
+.intro-title {
+  position: relative;
+  z-index: 5;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--marfil);
+  text-align: center;
+  line-height: .85;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-skip {
+  position: absolute;
+  z-index: 10;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: calc(clamp(1rem, 3vw, 2rem) + env(safe-area-inset-bottom, 0px));
+  font: 600 1rem var(--display);
+  letter-spacing: .02em;
+  color: var(--marfil);
+  background: rgba(23, 23, 47, .6);
+  border: 1.5px solid rgba(244, 241, 234, .5);
+  border-radius: 999px;
+  padding: .5rem 1.2rem;
+  cursor: pointer;
+}
+.intro-skip:hover { background: rgba(244, 241, 234, .12); }
+
+/* ---------- Pride ---------- */
+
+.pride-art {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  overflow: visible;
+}
+.pride-art .star path { fill: var(--marfil); }
+.pride-art .heart path { fill: var(--fucsia); }
+
+.intro-pride .intro-title {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(3.5rem, 11vh, 8rem);
+}
+
+.intro-pride.is-playing .star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 1.6s ease-in-out calc(var(--i) * .15s) both infinite alternate;
+}
+.intro-pride.is-playing .heart {
+  transform-box: fill-box;
+  transform-origin: 50% 60%;
+  animation:
+    heart-in .8s cubic-bezier(.2, 1.4, .4, 1) .2s both,
+    heart-beat 1s ease-in-out 2.2s 2;
+}
+.intro-pride.is-playing .stripe {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: stripe-down .9s cubic-bezier(.3, .8, .3, 1) calc(.8s + var(--i) * .09s) both;
+}
+.intro-pride.is-playing .intro-title { animation: title-in .7s ease-out 1.5s forwards; }
+
+@keyframes twinkle {
+  from { opacity: .15; transform: scale(.6); }
+  to { opacity: 1; transform: scale(1.15); }
+}
+@keyframes heart-in {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+@keyframes heart-beat {
+  0%, 100% { transform: scale(1); }
+  20% { transform: scale(1.07); }
+  40% { transform: scale(.98); }
+  60% { transform: scale(1.04); }
+}
+@keyframes stripe-down {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes title-in {
+  from { opacity: 0; letter-spacing: .3em; }
+  to { opacity: 1; letter-spacing: 0; }
+}
+
+/* ---------- Creamfields ---------- */
+
+.intro-creamfields { background: #08081A; }
+
+.bursts { position: absolute; inset: 0; }
+
+.burst {
+  position: absolute;
+  width: var(--size);
+  aspect-ratio: 3 / 2;
+  left: var(--x);
+  top: var(--y);
+  translate: -50% -50%;
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: burst var(--dur) ease-out var(--delay) forwards;
+}
+.burst-white { background: url("../assets/luces-creamfields.webp") center / contain no-repeat; }
+.burst-tint {
+  background: var(--color);
+  -webkit-mask: url("../assets/luces-creamfields.webp") center / contain no-repeat;
+  mask: url("../assets/luces-creamfields.webp") center / contain no-repeat;
+}
+
+@keyframes burst {
+  0% { opacity: 0; transform: scale(.25) rotate(calc(var(--rot) * -1)); }
+  18% { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.35) rotate(var(--rot)); }
+}
+
+.strobe {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: radial-gradient(circle at 50% 45%, #fff, rgba(255, 255, 255, .6) 40%, rgba(247, 37, 133, .35) 75%);
+  opacity: 0;
+  pointer-events: none;
+}
+.intro-creamfields.is-playing .strobe { animation: strobe 4.6s linear forwards; }
+
+@keyframes strobe {
+  0%, 30% { opacity: 0; }
+  31% { opacity: .55; }
+  34% { opacity: 0; }
+  52% { opacity: 0; }
+  53% { opacity: .55; }
+  56% { opacity: 0; }
+  68% { opacity: 0; }
+  69% { opacity: .8; }
+  75% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.intro-creamfields .intro-title {
+  font-size: clamp(3.2rem, 13vw, 11rem);
+  text-shadow: 0 0 .2em rgba(255, 255, 255, .8), 0 0 .6em var(--fucsia);
+}
+.intro-creamfields.is-playing .intro-title { animation: title-flash 1.4s ease-out 3.1s forwards; }
+
+@keyframes title-flash {
+  0% { opacity: 0; transform: scale(1.3); filter: blur(8px); }
+  40% { opacity: 1; filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ---------- Noche de Museos ---------- */
+
+.intro-museos {
+  background: linear-gradient(to bottom, var(--noche-hondo), var(--noche) 65%, #1F1F3E);
+}
+
+.sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1.5px 1.5px at 8% 18%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 22% 8%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 31% 30%, var(--marfil) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 47% 14%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 63% 26%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 71% 9%, var(--marfil) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 88% 21%, var(--marfil) 99%, transparent),
+    radial-gradient(1px 1px at 94% 36%, var(--marfil) 99%, transparent);
+}
+.moon {
+  position: absolute;
+  top: 9%;
+  left: 12%;
+  width: clamp(3rem, 7vw, 5.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: inset clamp(.7rem, 1.6vw, 1.3rem) clamp(-.4rem, -.8vw, -.2rem) 0 0 var(--farol);
+  transform: rotate(-20deg);
+}
+
+.floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 22%;
+  background: linear-gradient(to bottom, #2A2A52, var(--noche-hondo));
+  border-top: 2px solid rgba(242, 193, 78, .35);
+}
+
+.walker {
+  position: absolute;
+  z-index: 3;
+  bottom: calc(22% - 1px);
+  left: 0;
+  width: clamp(17rem, 40vw, 34rem);
+  transform: translateX(-105%);
+}
+.trex { display: block; width: 100%; height: auto; overflow: visible; }
+
+.intro-museos.is-playing .walker { animation: walk-across 6.2s linear forwards; }
+.intro-museos.is-playing .trex .body { animation: bob .6s ease-in-out infinite; }
+.intro-museos.is-playing .trex .leg {
+  transform-box: fill-box;
+  transform-origin: 50% 4%;
+}
+.intro-museos.is-playing .trex .leg-front { animation: step 1.2s ease-in-out infinite; }
+.intro-museos.is-playing .trex .leg-back { animation: step 1.2s ease-in-out -.6s infinite; }
+
+@keyframes walk-across {
+  from { transform: translateX(-105%); }
+  to { transform: translateX(100vw); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.6px); }
+}
+@keyframes step {
+  0%, 100% { transform: rotate(14deg); }
+  50% { transform: rotate(-14deg); }
+}
+
+.intro-museos .intro-title {
+  position: absolute;
+  top: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 0 1rem;
+  font-size: clamp(3rem, 9vw, 7.5rem);
+}
+.intro-museos .intro-title span {
+  display: block;
+  font-family: var(--texto);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+  color: var(--farol);
+  margin-top: .6em;
+  line-height: 1.2;
+}
+.intro-museos.is-playing .intro-title { animation: title-in .9s ease-out 1.6s forwards; }
+
+/* ---------- Movimiento reducido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
